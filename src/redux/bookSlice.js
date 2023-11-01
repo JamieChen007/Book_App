@@ -5,7 +5,6 @@ import fakeApi from "../fakeApi";
 export const fetchBooks = createAsyncThunk("books/fetchBooks", async () => {
   try {
     const data = await fakeApi.fetchBooks();
-    console.log("data", data);
     return data;
   } catch (error) {
     console.error("Failed to fetch books", error);
@@ -27,9 +26,6 @@ const bookSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchBooks.fulfilled, (state, action) => {
-        // const books = Array.isArray(action.payload) ? action.payload : [];
-        // return [...books];
-
         return [...action.payload];
       })
       .addCase(fetchBooks.rejected, (state, action) => {
